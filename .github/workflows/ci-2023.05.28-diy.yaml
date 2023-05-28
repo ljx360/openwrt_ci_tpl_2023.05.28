@@ -86,7 +86,7 @@ jobs:
 
 
     - name: apt-get
-
+      run: |
         echo -e ""
         echo -e "apt-get"
         #sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
