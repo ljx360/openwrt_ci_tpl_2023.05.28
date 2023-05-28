@@ -14,12 +14,12 @@ on:
   repository_dispatch:
   workflow_dispatch:
     inputs:
-      input_openwrt_url:
+      config_openwrt_url:
         description: 'input_openwrt_url'
         required: false
         default: 'https://github.com/coolsnowwolf/lede'
 
-      input_openwrt_branch:
+      config_openwrt_branch:
         description: 'input_openwrt_branch'
         required: false
         default: 'master'
@@ -81,6 +81,12 @@ jobs:
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
+        echo "init os"
+
+
+
+    - name: apt-get
+
         echo -e ""
         echo -e "apt-get"
         #sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
@@ -141,7 +147,7 @@ jobs:
         
         echo ""
         echo "clone $REPO_URL"
-        #git clone $REPO_URL -b $REPO_BRANCH /workdir/openwrt
+        git clone $REPO_URL -b $REPO_BRANCH /workdir/openwrt
         #ljx
         
         
@@ -228,6 +234,7 @@ jobs:
         echo "echo build date to .config"
         [ ! -e $CONFIG_FILE_FULL_PATH ] && touch $CONFIG_FILE_FULL_PATH
         echo CONFIG_GRUB_TITLE=\"OpenWrt,Lean x64,ljx,Build on $(date +%F_%T)\" >> $CONFIG_FILE_FULL_PATH
+        tail $CONFIG_FILE_FULL_PATH
 
 
 
